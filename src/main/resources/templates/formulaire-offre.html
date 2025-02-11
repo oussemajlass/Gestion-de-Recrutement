@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulaire Offre</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container my-5">
+  <h1 class="text-center mb-4">Formulaire Offre</h1>
+  <form th:action="@{/admin/offres/save}" th:object="${offre}" method="post" class="card p-4 shadow">
+    <input type="hidden" th:field="*{id}" />
+    <div class="mb-3">
+      <label class="form-label">Mission</label>
+      <input type="text" class="form-control" th:field="*{mission}" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Contrat</label>
+      <input type="text" class="form-control" th:field="*{contrat}" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Spécialité</label>
+      <input type="text" class="form-control" th:field="*{spécialité}" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Salaire</label>
+      <input type="number" class="form-control" th:field="*{salaire}" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </form>
+</div>
+</body>
+</html>

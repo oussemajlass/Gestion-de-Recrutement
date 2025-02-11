@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gestion des Offres</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #343a40;
+      color: white;
+      position: fixed;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .sidebar .nav-link {
+      color: white;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .nav-link:hover {
+      background-color: #495057;
+    }
+    .content {
+      margin-left: 270px;
+      width: calc(100% - 270px);
+      padding: 20px;
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    table th, table td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>Admin</h2>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="/dashboard">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/recruiters">Gestion des Recruteurs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/admin/offres">Gestion des Offres</a>
+    </li>
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Gestion des Offres</h1>
+
+    <!-- Bouton pour créer une nouvelle offre -->
+    <a href="/admin/offres/create" class="btn btn-success mb-4">Créer une Nouvelle Offre</a>
+
+    <!-- Table des offres -->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Mission</th>
+        <th>Contrat</th>
+        <th>Spécialité</th>
+        <th>Salaire</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="offre : ${offres}">
+        <td th:text="${offre.id}"></td>
+        <td th:text="${offre.mission}"></td>
+        <td th:text="${offre.contrat}"></td>
+        <td th:text="${offre.spécialité}"></td>
+        <td th:text="${offre.salaire}"></td>
+        <td>
+          <!-- Boutons d'actions -->
+          <a th:href="@{/admin/offres/edit/{id}(id=${offre.id})}" class="btn btn-warning btn-sm">Modifier</a>
+          <a th:href="@{/admin/offres/delete/{id}(id=${offre.id})}" class="btn btn-danger btn-sm"
+             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')">Supprimer</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
